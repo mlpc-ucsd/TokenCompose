@@ -1,0 +1,7 @@
+path_list = [
+    0 "/home/shawn/local/szz/workspace/sd_ckpt/AB4_Denoise_Only_5e-6_R0",
+    1 "/home/shawn/local/szz/workspace/sd_ckpt/AB2_MSE_Only_5e-6_R0",
+    2 "/home/shawn/local/szz/workspace/sd_ckpt/AB3_BCE_Only_5e-6_R0",
+    3 "/home/shawn/local/szz/workspace/sd_ckpt/SIGMA_M8_U16_U32_U64_5e-6_R0",
+    4 sd14
+]

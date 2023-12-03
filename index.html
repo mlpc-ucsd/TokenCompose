@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="We introduce token-wise consistency terms between the image content and object segmentation maps in training text-to-image models for enhanced multi-category instance composition and photorealism.">
+  <meta name="keywords" content="TokenCompose, Diffusion, Stable Diffusion, finetuning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TokenCompose: Grounding Diffusion with Token-level Supervision</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <link rel="icon" href="./static/images/puzzle.png">
+
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <!-- juxtapose -->
+  <script src="static/js/juxtapose.js"></script>
+
+  <!-- <script src="./static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="./static/js/jquery.event.move.js" type="text/javascript"></script>
+<script src="./static/js/jquery.twentytwenty.js" type="text/javascript"></script>
+<link rel="stylesheet" href="./static/css/twentytwenty.css" type="text/css" media="screen" /> -->
+
+</head>
+
+
+<body>
+
+<!-- paper title and author -->
+<section class="section">
+  <!-- <div class="hero-body"> -->
+    <div class="container is-max-desktop no_max_width">
+      <div class="columns is-centered">
+        <div class="column has-text-centered is-four-fifths">
+          <h1 class="title is-1 publication-title">
+            <img src="./static/images/puzzle.png" width="35"/>
+            <span class="rainbow_text_animated">TokenCompose</span>
+            : Grounding Diffusion with Token-level Supervision
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zwcolin.github.io">
+                <span class="fancy_text_color">Zirui Wang</span>
+              </a><sup>1, 3</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/JamesSand">
+                <span class="fancy_text_color">Zhizhou Sha</span>
+              </a><sup>2, 3</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/zh-ding">
+                <span class="fancy_text_color">Zheng Ding</span>
+              </a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/modric197">
+                <span class="fancy_text_color">Yilin Wang</span>
+              </a><sup>2, 3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://pages.ucsd.edu/~ztu/">
+                <span class="fancy_text_color">Zhuowen Tu</span>
+              </a><sup>3</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Princeton University,</span>
+            <span class="author-block"><sup>2</sup>Tsinghua University,</span>
+            <span class="author-block"><sup>3</sup>University of California, San Diego</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://github.com/JamesSand"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (Coming Soon)</span>
+                </a>
+              </span>
+              <!-- arxiv link -->
+              <span class="link-block">
+                <a href="https://github.com/JamesSand"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (Coming Soon)</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/JamesSand"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- teaset video -->
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="subtitle has-text-centered">
+            A <span class="fancy_text_color"><b>Stable Diffusion</b></span> model finetuned with token-wise grounding objectives for enhanced multi-category instance composition and photorealism.
+          </h2>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <video id="teaser" autoplay muted width="90%" style="width: 100%;" controls>
+            <source src="static/videos/Video_Teaser.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+
+    </div>
+  <!-- </div> -->
+</section>
+
+<!-- carousel -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="static/gif_imgio_mp4/knife_dog_5249323016676656405.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="static/gif_imgio_mp4/remote_tv_107.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="static/gif_imgio_mp4/refrigerator_horse_2234179857723726808.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="static/gif_imgio_mp4/donut_umbrella_804225328973800541.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color">Abstract</span>
+        </h2>
+        <div class="content">
+          <p>
+            We present <span class="fancy_text_color">TokenCompose</span>, a Latent Diffusion Model for text-to-image generation that achieves enhanced consistency between user-specified text prompts and model-generated images. Despite its tremendous success, the standard denoising process in the Latent Diffusion Model takes text prompts as conditions only, absent explicit constraint for the consistency between the text prompts and the image contents, leading to unsatisfactory results for composing multiple object categories. Our proposed <span class="fancy_text_color">TokenCompose</span> aims to improve multi-category instance composition by introducing the token-wise consistency terms between the image content and object segmentation maps in the finetuning stage. <span class="fancy_text_color">TokenCompose</span> can be applied directly to the existing training pipeline of text-conditioned diffusion models without extra human labeling information. By finetuning Stable Diffusion with our approach, the model exhibits significant improvements in multi-category instance composition and enhanced photorealism for its generated images.
+          </p>
+        </div>
+        <div class="has-text-centered">
+          <img src="./static/images/teaser.jpg">
+        </div>
+  
+        <h2 class="subtitle has-text-centered">
+          <b>Given a user-specified text prompt consisting of object compositions</b> that are <i>unlikely</i> to appear simultaneously in a natural scene, our proposed <span class="fancy_text_color"><b>TokenCompose</b></span> method attains significant performance enhancement over the baseline Latent Diffusion Model (<i>e.g.,</i> Stable Diffusion) by being able to generate multiple categories of instances from the prompt more accurately.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- main table -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color">
+            <b>Performance of our model in comparison to baselines</b>
+          </span>
+        </h2>
+
+        <div class="has-text-centered">
+          <p>
+            We evaluate the performance based on multi-category instance composition (<i>i.e.,</i> Object Accuracy (OA) from VISOR Benchmark and MG2-5 from our <span class="dnerf">MultiGen</span> Benchmark), photorealism (<i>i.e.,</i> FID from <b>C</b>OCO and <b>F</b>lickr30K Entities validation splits), and inference efficiency. All comparisons are based on Stable Diffusion 1.4.
+          </p>
+        </div>
+
+        </br></br>
+
+        <div class="has-text-centered">
+          <img src="static/images/table1.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<hr>
+
+<!-- training pipeline -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color">
+            <b>An overview of the training pipeline</b>
+          </span>
+        </h2>
+
+        <div class="has-text-centered">
+          <p>
+            Given a training prompt that faithfully describes an image, we adopt a POS tagger and Grounded SAM to extract all binary segmentation maps of the image corresponding to noun tokens from the prompt. Then, we jointly optimize the denoising U-Net of the diffusion model with both its original denoising and our grounding objective.
+          </p>
+        </div>
+
+        </br></br>
+
+        <div class="has-text-centered">
+          <img src="static/images/pipeline.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- loss illustration video -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- <div class="hero-body"> -->
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">
+            <span class="fancy_text_color">Loss Illustration</span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <span class="subtitle has-text-centered">
+            We present a short video to illustrate how <span class="fancy_text_color"><b>Token Loss</b></span> and <span class="fancy_text_color"><b>Pixel Loss</b></span> work together to improve the performance of Stable Diffusion 1.4.
+          </span>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <video id="teaser" autoplay muted style="width: 90%;" controls>
+            <source src="static/videos/loss_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <!-- <video id="teaser" autoplay muted width="90%" style="margin-top: 0.5%;" controls>
+        <source src="static/videos/loss_video.mp4"
+                type="video/mp4">
+      </video> -->
+
+      <!-- <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <span class="subtitle has-text-centered">
+            We present a short video to illustrate how <span class="fancy_text_color"><b>Token Loss</b></span> and <span class="fancy_text_color"><b>Pixel</b></span> Loss work together to improve the performance of Stable Diffusion 1.4.
+          </span>
+        </div>
+      </div> -->
+      
+      
+    <!-- </div> -->
+  </div>
+</section> 
+
+<hr>
+
+
+<!-- slider jaxtapose -->
+<section class="section">
+  <div class="container is-max-desktop" style="width: 80%;">
+
+    <!-- title -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color"> Cross Attention Map Comparison</span>
+        </h2>
+        <div class="content">
+          <p>
+            We present several comparisons of attention maps between SD 1.4 and our model. While Stable Diffusion 1.4 struggles to distinguish objects in its cross-attention map, our model excels in effectively grounding the objects.
+          </p>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- row 1 -->
+    <div class="columns is-centered">
+
+      <!-- col 1 -->
+      <div class="column">
+        <button class="collapsible">
+          <span class="big_text">
+            A 
+            <u>cake</u>
+            <!-- <span style="color:#7E5F43">cake</span> -->
+            next to a 
+            <u>keyboard</u>
+            <!-- <span style="color: #5F9D91;">keyboard</span> -->
+          </span>
+        </button>
+        <div class="columns is-centered has-text-centered collapse_content" >
+          <!-- row 1 col 1 origin img -->
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span class="big_text">&nbsp;</span>
+              <br><br>
+              <div>
+                <img src="static/jaxtapose_imgs/cake_kayboard_117/rec_img.png">
+              </div>
+              <!-- <img src="static/jaxtapose_imgs/cake_kayboard_117/rec_img.png"> -->
+            </div>
+          </div>
+
+          <!-- row 1 col 2  cake -->
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span  class="big_text" style="color:#7E5F43;">
+                cake
+              </span>
+              <br><br>
+
+              <div class="tab_container">
+                <div id="row_1_cake"></div>
+                <script>
+                slider = new juxtapose.JXSlider('#row_1_cake',
+                    [
+                        {
+                            src: 'static/jaxtapose_imgs/cake_kayboard_117/cake_4.png',
+                            label: 'SD 1.4',
+                        },
+                        {
+                            src: 'static/jaxtapose_imgs/cake_kayboard_117/cake_3.png',
+                            label: 'Ours',
+                        }
+                    ],
+                    {
+                        animate: true,
+                        showLabels: true,
+                        showCredits: true,
+                        startingPosition: "50%",
+                        makeResponsive: true
+                    });
+                </script>
+              </div>
+              
+
+
+
+
+            </div>
+          </div>
+
+          <!-- row 1 col 3 keyboard -->
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span class="big_text" style="color: #5F9D91;">keyboard</span>
+              <br><br>
+              <div id="row_1_keyboard"></div>
+              <script>
+              slider = new juxtapose.JXSlider('#row_1_keyboard',
+                  [
+                  {
+                          src: 'static/jaxtapose_imgs/cake_kayboard_117/keyboard_4.png',
+                          label: 'SD 1.4',
+                      },
+                      {
+                          src: 'static/jaxtapose_imgs/cake_kayboard_117/keyboard_3.png',
+                          label: 'Ours',
+                      }
+                  ],
+                  {
+                      animate: true,
+                      showLabels: true,
+                      showCredits: true,
+                      startingPosition: "50%",
+                      makeResponsive: true
+                  });
+              </script>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- col 2 -->
+      <div class="column">
+        <!-- row 2 -->
+        <button class="collapsible">
+          <span class="big_text">
+            A 
+            <u>cat</u>
+            <!-- <span style="color: #6B4A2A;">cat</span> -->
+            standing above a 
+            <u>backpack</u>
+            <!-- <span style="color: #E70965;">backpack</span> -->
+          
+        </button>
+        <div class="columns is-centered has-text-centered collapse_content">
+          <!-- row 2 col 1 ori img -->
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span class="big_text">&nbsp;</span>
+              <br><br>
+              <img src="static/jaxtapose_imgs/cat_backpack_44/rec_img.png">
+            </div>
+          </div>
+
+          <!-- row 2 col 2 cat -->
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span class="big_text" style="color: #6B4A2A;">cat</span>
+              <br><br>
+              <div id="row_2_cat"></div>
+              <script>
+              slider = new juxtapose.JXSlider('#row_2_cat',
+                  [
+                      {
+                          src: 'static/jaxtapose_imgs/cat_backpack_44/cat_4.png',
+                          label: 'SD 1.4',
+                      },
+                      {
+                          src: 'static/jaxtapose_imgs/cat_backpack_44/cat_3.png',
+                          label: 'Ours',
+                      }
+                  ],
+                  {
+                      animate: true,
+                      showLabels: true,
+                      showCredits: true,
+                      startingPosition: "50%",
+                      makeResponsive: true
+                  });
+              </script>
+
+            </div>
+          </div>
+
+          <!-- row 2 col 2 backpack -->
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span class="big_text" style="color: #E70965;">backpack</span>
+              <br><br>
+              <div id="row_2_backpack"></div>
+              <script>
+              slider = new juxtapose.JXSlider('#row_2_backpack',
+                  [
+                  {
+                          src: 'static/jaxtapose_imgs/cat_backpack_44/backpack_4.png',
+                          label: 'SD 1.4',
+                      },
+                      {
+                          src: 'static/jaxtapose_imgs/cat_backpack_44/backpack_3.png',
+                          label: 'Ours',
+                      }
+                  ],
+                  {
+                      animate: true,
+                      showLabels: true,
+                      showCredits: true,
+                      startingPosition: "50%",
+                      makeResponsive: true
+                  });
+              </script>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>    
+
+    <br>
+
+    <!-- row 2 -->
+    <div class="columns is-centered">
+
+      <div class="column">
+        <!-- row 4 -->
+        <button class="collapsible">
+          <span class="big_text">
+
+            An 
+            <u>apple</u>
+            <!-- <span style="color: #FB6D9E;">apple</span> -->
+            to the left of an 
+            <u>orange</u>
+            <!-- <span style="color: #FB6B00;">orange</span> -->
+
+        </button>
+        <div class="columns is-centered has-text-centered collapse_content">
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span class="big_text">&nbsp;</span>
+              <br><br>
+              <img src="static/jaxtapose_imgs/apple_orange_15351/rec_img.png">
+            </div>
+          </div>
+
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span class="big_text" style="color: #FB6D9E;">apple</span>
+              <br><br>
+              <div id="row_4_apple"></div>
+              <script>
+              slider = new juxtapose.JXSlider('#row_4_apple',
+                  [
+                      {
+                          src: 'static/jaxtapose_imgs/apple_orange_15351/4_apple.png',
+                          label: 'SD 1.4',
+                      },
+                      {
+                          src: 'static/jaxtapose_imgs/apple_orange_15351/3_apple.png',
+                          label: 'Ours',
+                      }
+                  ],
+                  {
+                      animate: true,
+                      showLabels: true,
+                      showCredits: true,
+                      startingPosition: "50%",
+                      makeResponsive: true
+                  });
+              </script>
+
+            </div>
+          </div>
+
+          <div class="column collapse_color">
+            <div class="content">
+              <br>
+              <span class="big_text" style="color: #FB6B00;">orange</span>
+              <br><br>
+              <div id="row_4_orange"></div>
+              <script>
+              slider = new juxtapose.JXSlider('#row_4_orange',
+                  [
+                  {
+                          src: 'static/jaxtapose_imgs/apple_orange_15351/4_orange.png',
+                          label: 'SD 1.4',
+                      },
+                      {
+                          src: 'static/jaxtapose_imgs/apple_orange_15351/3_orange.png',
+                          label: 'Ours',
+                      }
+                  ],
+                  {
+                      animate: true,
+                      showLabels: true,
+                      showCredits: true,
+                      startingPosition: "50%",
+                      makeResponsive: true
+                  });
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+            <!-- row 3 -->
+            <button class="collapsible">
+              <span class="big_text">
+    
+                An 
+                <u>elephant</u>
+                <!-- <span style="color: #90898A;">elephant</span> -->
+                standing next to a 
+                <u>suitcase</u>
+                <!-- <span style="color: #90829F;">suitcase</span> -->
+    
+            </button>
+            <div class="columns is-centered has-text-centered collapse_content">
+              <div class="column collapse_color">
+                <div class="content">
+                  <br>
+                  <span class="big_text">&nbsp;</span>
+                  <br><br>
+                  <img src="static/jaxtapose_imgs/elephant_suitcase_106/rec_img.png">
+                </div>
+              </div>
+    
+              <div class="column collapse_color">
+                <div class="content">
+                  <br>
+                  <span class="big_text" style="color: #90898A;">elephant</span>
+                  <br><br>
+                  <div id="row_3_elephant"></div>
+                  <script>
+                  slider = new juxtapose.JXSlider('#row_3_elephant',
+                      [
+                          {
+                              src: 'static/jaxtapose_imgs/elephant_suitcase_106/elephant_4.png',
+                              label: 'SD 1.4',
+                          },
+                          {
+                              src: 'static/jaxtapose_imgs/elephant_suitcase_106/elephant_3.png',
+                              label: 'Ours',
+                          }
+                      ],
+                      {
+                          animate: true,
+                          showLabels: true,
+                          showCredits: true,
+                          startingPosition: "50%",
+                          makeResponsive: true
+                      });
+                  </script>
+    
+                </div>
+              </div>
+    
+              <div class="column collapse_color">
+                <div class="content">
+                  <br>
+                  <span class="big_text" style="color: #90829F;">suitcase</span>
+                  <br><br>
+                  <div id="row_3_suitcase"></div>
+                  <script>
+                  slider = new juxtapose.JXSlider('#row_3_suitcase',
+                      [
+                      {
+                              src: 'static/jaxtapose_imgs/elephant_suitcase_106/suitcase_4.png',
+                              label: 'SD 1.4',
+                          },
+                          {
+                              src: 'static/jaxtapose_imgs/elephant_suitcase_106/suitcase_3.png',
+                              label: 'Ours',
+                          }
+                      ],
+                      {
+                          animate: true,
+                          showLabels: true,
+                          showCredits: true,
+                          startingPosition: "50%",
+                          makeResponsive: true
+                      });
+                  </script>
+                </div>
+              </div>
+            </div>
+      </div>
+
+    </div>
+
+    <br>
+
+    <!-- row 3 apple bench heli -->
+    <button class="collapsible">
+      <span class="big_text">
+
+        An 
+        <u>apple</u>
+        <!-- <span style="color: #82E965;">
+          applpe
+        </span> -->
+        on a 
+        <u>bench</u>
+        <!-- <span style="color: #671C01;">
+          bench
+        </span> -->
+        with a 
+        <u>helicopter</u>
+        <!-- <span style="color: #8F0035;">
+          helicopter
+        </span>  -->
+        behind it
+
+    </button>
+    <div class="columns is-centered has-text-centered collapse_content">
+      <div class="column collapse_color">
+        <div class="content">
+          <br>
+          <span class="big_text">&nbsp;</span>
+          <br><br>
+          <img src="static/jaxtapose_imgs/apple_bench_heli_15407/rec_img.png">
+        </div>
+      </div>
+
+      <div class="column collapse_color">
+        <div class="content">
+          <br>
+          <span class="big_text" style="color: #82E965;">apple</span>
+          <br><br>
+          <div id="row_5_apple"></div>
+          <script>
+          slider = new juxtapose.JXSlider('#row_5_apple',
+              [
+                  {
+                      src: 'static/jaxtapose_imgs/apple_bench_heli_15407/4_apple.png',
+                      label: 'SD 1.4',
+                  },
+                  {
+                      src: 'static/jaxtapose_imgs/apple_bench_heli_15407/3_apple.png',
+                      label: 'Ours',
+                  }
+              ],
+              {
+                  animate: true,
+                  showLabels: true,
+                  showCredits: true,
+                  startingPosition: "50%",
+                  makeResponsive: true
+              });
+          </script>
+
+        </div>
+      </div>
+
+      <div class="column collapse_color">
+        <div class="content">
+          <br>
+          <span class="big_text" style="color: #671C01;">bench</span>
+          <br><br>
+          <div id="row_5_bench"></div>
+          <script>
+          slider = new juxtapose.JXSlider('#row_5_bench',
+              [
+              {
+                      src: 'static/jaxtapose_imgs/apple_bench_heli_15407/4_bench.png',
+                      label: 'SD 1.4',
+                  },
+                  {
+                      src: 'static/jaxtapose_imgs/apple_bench_heli_15407/3_bench.png',
+                      label: 'Ours',
+                  }
+              ],
+              {
+                  animate: true,
+                  showLabels: true,
+                  showCredits: true,
+                  startingPosition: "50%",
+                  makeResponsive: true
+              });
+          </script>
+        </div>
+      </div>
+
+      <div class="column collapse_color">
+        <div class="content">
+          <br>
+          <span class="big_text" style="color: #8F0035;">helicopter</span>
+          <br><br>
+          <div id="row_5_helicopter"></div>
+          <script>
+          slider = new juxtapose.JXSlider('#row_5_helicopter',
+              [
+              {
+                      src: 'static/jaxtapose_imgs/apple_bench_heli_15407/4_helicopter.png',
+                      label: 'SD 1.4',
+                  },
+                  {
+                      src: 'static/jaxtapose_imgs/apple_bench_heli_15407/3_helicopter.png',
+                      label: 'Ours',
+                  }
+              ],
+              {
+                  animate: true,
+                  showLabels: true,
+                  showCredits: true,
+                  startingPosition: "50%",
+                  makeResponsive: true
+              });
+          </script>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+  </div>
+</section>
+
+
+<!-- timestep interpolation -->
+<section class="section">
+  <div class="container is-max-desktop " style="width: 80%;">
+
+    <!-- title -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color"> Timestep Interpolation</span>
+        </h2>
+        <div class="content">
+          <p>
+            We provide several interpolation on timesteps, where you can have a intuitive understanding of the difference in cross attention maps of our model and the Stable Diffusion 1.4 Model on different <b>timesteps</b>.
+          </p>
+        </div>
+      </div>  
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="columns is-vcentered interpolation-panel">
+
+          <!-- timestep interpolation 1 -->
+          <div class="column interpolation-video-column">
+
+            <div class="interpolation_color">
+              <div id="interpolation-image-wrapper">
+                Loading...
+              </div>
+              <input class="slider is-fullwidth is-large is-info"
+                     id="interpolation-slider"
+                     step="1" min="0" max="100" value="0" type="range">
+  
+              <div class="has-text-centered fancy_text_color" id="interpolation-slider-text"></div>
+  
+            </div>
+
+            
+          </div>
+
+          <!-- Timestep interpolation 2 -->
+          <div class="column interpolation-video-column">
+
+            <div class="interpolation_color">
+              <div id="interpolation-image-wrapper-1">
+                Loading...
+              </div>
+              <input class="slider is-fullwidth is-large is-info"
+                     id="interpolation-slider-1"
+                     step="1" min="0" max="100" value="0" type="range">
+  
+              <div class="has-text-centered fancy_text_color" id="interpolation-slider-text-1">Loading...</div>
+  
+            </div>
+
+           
+
+          </div>
+
+        </div>
+        <br/>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- head interpolation -->
+<section class="section">
+  <div class="container is-max-desktop" style="width: 80%;">
+
+    <!-- title -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color"> Head Interpolation</span>
+        </h2>
+        <div class="content">
+          <p>
+            We provide several interpolation on different cross attention heads. 
+          </p>
+        </div>
+      </div>  
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="columns is-vcentered interpolation-panel">
+
+          <!-- head interpolation 1 -->
+          <div class="column interpolation-video-column">
+
+            <div class="interpolation_color">
+              <div id="interpolation-image-wrapper-2">
+                Loading...
+              </div>
+              <input class="slider is-fullwidth is-large is-info"
+                     id="interpolation-slider-2"
+                     step="1" min="0" max="100" value="0" type="range">
+  
+              <div class="has-text-centered fancy_text_color" id="interpolation-slider-text-2">Loading...</div>
+  
+            </div>
+
+            
+          </div>
+
+          <!-- interpolation 2 -->
+          <div class="column interpolation-video-column">
+
+            <div class="interpolation_color">
+              <div id="interpolation-image-wrapper-3">
+                Loading...
+              </div>
+              <input class="slider is-fullwidth is-large is-info"
+                     id="interpolation-slider-3"
+                     step="1" min="0" max="100" value="0" type="range">
+  
+              <div class="has-text-centered fancy_text_color" id="interpolation-slider-text-3">Loading...</div>
+  
+            </div>
+
+            
+          </div>
+
+        </div>
+        <br/>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- res interpolation -->
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- title -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color"> Resolution Interpolation</span>
+        </h2>
+        <div class="content">
+          <p>
+            We provide several interpolation on different cross attention resolution. 
+          </p>
+        </div>
+      </div>  
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="columns is-vcentered interpolation-panel">
+
+          <!-- <div style="padding: .75rem;">
+            
+          </div> -->
+
+          <!-- res interpolation 1 -->
+          <div class="column interpolation-video-column">
+
+            <div class="interpolation_color">
+              <div id="interpolation-image-wrapper-4">
+                Loading...
+              </div>
+              <input class="slider is-fullwidth is-large is-info"
+                     id="interpolation-slider-4"
+                     step="1" min="0" max="100" value="0" type="range">
+  
+              <div class="has-text-centered fancy_text_color" id="interpolation-slider-text-4">Loading...</div>
+  
+            </div>
+
+            
+          </div>
+
+          <!-- res interpolation 2 -->
+          <div class="column interpolation-video-column">
+
+            <div class="interpolation_color">
+              <div id="interpolation-image-wrapper-5">
+                Loading...
+              </div>
+              <input class="slider is-fullwidth is-large is-info"
+                     id="interpolation-slider-5"
+                     step="1" min="0" max="100" value="0" type="range">
+  
+              <div class="has-text-centered fancy_text_color" id="interpolation-slider-text-5">Loading...</div>
+  
+            </div>
+
+            
+          </div>
+
+          
+
+        </div>
+        <br/>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<hr>
+
+<!-- more qualitative results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color">
+            <b>
+              Qualitative comparison between baselines and our model
+            </b>
+          </span>
+        </h2>
+
+        <div class="has-text-centered">
+          <p>
+            We demonstrate the effectiveness of our training framework in multi-category instance composition compared with a frozen <b>Stable Diffusion</b> Model , <b>Composable Diffusion</b>, <b>Structured Diffusion</b>, <b>Layout Guidance Diffusion</b>, and  <b>Attend-and-Excite</b>. The first three columns show composition of two categories that is deemed difficult to be generated from a pretrained Stable Diffusion model (due to rare chances of co-occurrence or significant difference in instance sizes in the real world). The last three columns show the composition of three categories where composing them requires understanding of visual representations of each text token.
+          </p>
+        </div>
+
+        </br></br>
+
+        <div class="has-text-centered">
+          <img src="static/images/comparison.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<hr>
+
+<section class="section">
+  <div class="container is-max-desktop content">
+    <div class="columns is-centered has-text-centered">
+
+      <!-- <div></div> -->
+      <h2 class="title is-four-fifths">
+        <span class="fancy_text_color">Citation</span>
+      </h2>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <pre style="border-radius: 25px;">
+          <code>
+            Change here 
+          </code>
+        </pre>
+      </div>
+    </div>
+      <!-- <pre id="fancy_grad"> -->
+      
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <span>Website based on <a href="https://nerfies.github.io">Nerfies</a>.</span>
+
+
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
