@@ -1,0 +1,11 @@
+accelerate==0.21.0
+git+https://github.com/openai/CLIP.git
+diffusers==0.20.0
+transformers==4.35.0
+wandb==0.15.8
+datasets
+ftfy
+tensorboard
+Jinja2
+tabulate
+scipy
