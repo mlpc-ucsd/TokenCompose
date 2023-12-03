@@ -1,16 +1,23 @@
 <p align="center">
 
-  <h1 align="center"><a href="https://mlpc-ucsd.github.io/TokenCompose/">TokenCompose</a>: Grounding Diffusion with Token-level Supervision</h1>
+  <h1 align="center"><a href="https://mlpc-ucsd.github.io/TokenCompose/">🧩 TokenCompose</a>: Grounding Diffusion with Token-level Supervision</h1>
   <p align="center">
-    <a href="https://zwcolin.github.io/"><strong>Zirui Wang</strong></a>
+    <a href="https://zwcolin.github.io/"><strong>Zirui Wang</strong></a><sup>1, 3</sup>
     ·
-    <a href="https://github.com/JamesSand"><strong>Zhizhou Sha</strong></a>
+    <a href="https://github.com/JamesSand"><strong>Zhizhou Sha</strong></a><sup>2, 3</sup>
     ·
-    <a href="https://github.com/zh-ding"><strong>Zheng Ding</strong></a>
+    <a href="https://github.com/zh-ding"><strong>Zheng Ding</strong></a><sup>3</sup>
     ·
-    <a href="https://github.com/modric197"><strong>Yilin Wang</strong></a>
+    <a href="https://github.com/modric197"><strong>Yilin Wang</strong></a><sup>2, 3</sup>
     ·
-    <a href="https://pages.ucsd.edu/~ztu/"><strong>Zhuowen Tu</strong></a>
+    <a href="https://pages.ucsd.edu/~ztu/"><strong>Zhuowen Tu</strong></a><sup>3</sup>
+  </p>
+  <p align="center">
+    <sup>1</sup><strong>Princeton University</strong>
+    ·
+    <sup>2</sup><strong>Tsinghua University</strong>
+    ·
+    <sup>3</sup><strong>University of California, San Diego</strong>
   </p>
 
 </p>
@@ -150,7 +157,7 @@ https://github.com/JamesSand/TokenCompose/assets/98897204/2f673b01-518e-491f-8d2
   </tr>
 
   <tr>
-    <td align="center"><a href="https://github.com/JamesSand/TokenCompose"><strong>TokenCompose (Ours)</strong></a></td>
+    <td align="center"><a href="https://github.com/mlpc-ucsd/TokenCompose"><strong>TokenCompose (Ours)</strong></a></td>
     <td align="center"><b>52.15</b></td>
     <td align="center"><b>98.08</b><sub>0.40</sub></td>
     <td align="center"><b>76.16</b><sub>1.04</sub></td>
@@ -283,7 +290,7 @@ See [MultiGen](multigen/readme.md) for details.
   </tr>
 
   <tr>
-    <td align="center"><a href="https://github.com/JamesSand/TokenCompose">Ours</a></td>
+    <td align="center"><a href="https://github.com/mlpc-ucsd/TokenCompose">Ours</a></td>
     <td align="center"><b>98.08</b><sub>0.40</sub></td>
     <td align="center"><b>76.16</b><sub>1.04</sub></td>
     <td align="center"><b>28.81</b><sub>0.95</sub></td>
