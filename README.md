@@ -1,6 +1,6 @@
 <p align="center">
 
-  <h1 align="center"><a href="https://github.com/JamesSand">TokenCompose</a>: Grounding Diffusion with Token-level Supervision</h1>
+  <h1 align="center"><a href="https://mlpc-ucsd.github.io/TokenCompose/">TokenCompose</a>: Grounding Diffusion with Token-level Supervision</h1>
   <p align="center">
     <a href="https://zwcolin.github.io/"><strong>Zirui Wang</strong></a>
     ·
@@ -16,11 +16,11 @@
 </p>
 
 <h3 align="center">
-  <a href="https://jamessand.github.io/TokenCompose/"><strong>Project Page</strong></a>
+  <a href="https://mlpc-ucsd.github.io/TokenCompose/"><strong>Project Page</strong></a>
   |
-  <a href="https://github.com/JamesSand"><strong>arXiv</strong></a>
+  <a href="https://mlpc-ucsd.github.io/TokenCompose/"><strong>arXiv</strong></a>
   |
-  <a href="https://github.com/JamesSand"><strong>Twitter</strong></a>
+  <a href="https://mlpc-ucsd.github.io/TokenCompose/"><strong>Twitter</strong></a>
 </h3>
 
 https://github.com/JamesSand/TokenCompose/assets/98897204/2f673b01-518e-491f-8d2b-9e6e8102c1d7
