@@ -405,11 +405,9 @@ This repository is released under the [Attribution-NonCommercial 4.0 Internation
 
 Our code is built upon [diffusers](https://github.com/huggingface/diffusers), [prompt-to-prompt](https://github.com/google/prompt-to-prompt), [VISOR](https://github.com/microsoft/VISOR), [Grounded-Segment-Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything), and [CLIP](https://github.com/openai/CLIP). We thank all these authors for their nicely open sourced code and their great contributions to the community.
 
-The corresponding research paper is TODO: xxx (refer to arxi)
-
 ## 📝 Citation
 
 If you find our work useful, please consider citing:
 ```
-TODO Change Citation here
+Release soon!
 ```
