@@ -56,7 +56,7 @@ https://github.com/JamesSand/TokenCompose/assets/98897204/2f673b01-518e-491f-8d2
 
   <tr>
     <!-- <th align="center">&nbsp;</th> -->
-    <th rowspan="2" align="center">Object Accuray</th>
+    <th rowspan="2" align="center">Object Accuracy</th>
     <th colspan="4" align="center">COCO</th>
     <th colspan="4" align="center">ADE20K</th>
     <th rowspan="2" align="center">FID (COCO)</th>
