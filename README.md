@@ -358,15 +358,15 @@ train/data/
             000000000142.jpg
             000000000370.jpg
             ...
-    coco_gsam_seg.zip
+    coco_gsam_seg.tar
 ```
 
 Then, run the following command to unzip the segmentation data:
 
 ```bash
 cd train/data
-unzip coco_gsam_seg.zip
-rm coco_gsam_seg.zip
+tar -xvf coco_gsam_seg.tar
+rm coco_gsam_seg.tar
 ```
 
 After the setup, you should have the following structure under the `train/data` directory:
