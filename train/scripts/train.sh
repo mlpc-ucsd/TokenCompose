@@ -33,7 +33,7 @@ OUTPUT_DIR="results/${RUN_NAME}"
 mkdir -p $OUTPUT_DIR
 
 # train!
-python src/train_text_to_image_clean.py \
+python src/train_token_compose.py \
   --pretrained_model_name_or_path=$MODEL_NAME \
   --train_data_dir=$TRAIN_DIR \
   --train_batch_size=1 \
