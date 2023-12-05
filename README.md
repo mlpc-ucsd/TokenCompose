@@ -30,8 +30,7 @@
   <a href="https://mlpc-ucsd.github.io/TokenCompose/"><strong>Twitter</strong></a>
 </h3>
 
-https://github.com/JamesSand/TokenCompose/assets/98897204/2f673b01-518e-491f-8d2b-9e6e8102c1d7
-
+https://github.com/mlpc-ucsd/TokenCompose/assets/59942464/93feea16-4eac-49c3-b286-ee390a325b17
 
 <p align="center">
   A <span style="color: lightblue">Stable Diffusion</span> model finetuned with <strong>token-level grounding objectives</strong> for enhanced <strong>multi-category instance composition</strong> and <strong>photorealism</strong>.
