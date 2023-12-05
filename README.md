@@ -20,6 +20,13 @@
     <sup>3</sup><strong>University of California, San Diego</strong>
   </p>
 
+  <p align="center" style="font-size: 70%;">
+    <!-- <strong>
+      <i>Project done while Zirui Wang, Zhizhou Sha and Yilin Wang interned at UC San Diego.</i>
+    </strong> -->
+    <i>Project done while Zirui Wang, Zhizhou Sha and Yilin Wang interned at UC San Diego.</i>
+  </p>
+
 </p>
 
 <h3 align="center">
