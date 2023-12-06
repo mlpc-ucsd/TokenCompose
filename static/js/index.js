@@ -167,42 +167,51 @@ $(document).ready(function() {
 
         $(inter_slider_name).prop('max', frame_ls_i - 1);
       }(i));
-
-
     }
 
     bulmaSlider.attach();
-    
 })
-function changeSize(){
-  const height= $('#resize_image1').height()
-  const width= $('#resize_image1').width()
-  $('#row_1_cake').height(height)
-  $('#row_1_cake').width(width)
-  $('#row_1_keyboard').height(height)
-  $('#row_1_keyboard').width(width)
+// function changeSize(){
+//   const height= $('#resize_image1').height()
+//   const width= $('#resize_image1').width()
+//   $('#row_1_cake').height(height)
+//   $('#row_1_cake').width(width)
+//   $('#row_1_keyboard').height(height)
+//   $('#row_1_keyboard').width(width)
 
-  if(height/width>1.5){
-    window.location.reload()
-  }
-}
-changeSize()
- window.addEventListener('resize', function(event) {
-      changeSize()
-      // if(height/width>1.5){
-      //   window.location.reload()
-      // }
-}, false);
+//   if(height/width>1.5){
+//     window.location.reload()
+//   }
+// }
+// changeSize()
+//  window.addEventListener('resize', function(event) {
+//       changeSize()
+//       // if(height/width>1.5){
+//       //   window.location.reload()
+//       // }
+// }, false);
 
 
 
 function set_jaxtapose_img_size(){
-  const height= $('#jaxtapose_img_1').height()
-  const width= $('#jaxtapose_img_1').width()
-  $('#row_1_cake').height(height)
-  $('#row_1_cake').width(width)
-  $('#row_1_keyboard').height(height)
-  $('#row_1_keyboard').width(width)
+
+  const jaxtapose_name_ls = [
+    ['#jaxtapose_img_1', '#row_1_cake', '#row_1_keyboard'],
+    ['#jaxtapose_img_2', '#row_2_cat', '#row_2_backpack'],
+    ["#jaxtapose_img_3", "#row_3_elephant", "#row_3_suitcase"],
+    ['#jaxtapose_img_4', '#row_4_apple', '#row_4_orange'],
+    ["#jaxtapose_img_5", "#row_5_apple", "#row_5_bench", "#row_5_helicopter"]
+  ]
+
+  for (var i = 0; i < jaxtapose_name_ls.length; i++) {
+    const origin_img_height = $(jaxtapose_name_ls[i][0]).height()
+    const origin_img_width = $(jaxtapose_name_ls[i][0]).width()
+
+    for (var j = 1; j < jaxtapose_name_ls[i].length; j++) {
+      $(jaxtapose_name_ls[i][j]).height(origin_img_height)
+      $(jaxtapose_name_ls[i][j]).width(origin_img_width)
+    }
+  }
 }
 
 const size_timeout = setInterval(
