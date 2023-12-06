@@ -181,13 +181,17 @@ function changeSize(){
   $('#row_1_cake').width(width)
   $('#row_1_keyboard').height(height)
   $('#row_1_keyboard').width(width)
+
+  if(height/width>1.5){
+    window.location.reload()
+  }
 }
 changeSize()
  window.addEventListener('resize', function(event) {
       changeSize()
-      if(height/width>1.5){
-        window.location.reload()
-      }
+      // if(height/width>1.5){
+      //   window.location.reload()
+      // }
 }, false);
 
 // $(window).resize(function() {
