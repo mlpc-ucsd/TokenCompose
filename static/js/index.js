@@ -174,20 +174,26 @@ $(document).ready(function() {
     bulmaSlider.attach();
     
 })
+function changeSize(){
+  const height= $('#resize_image1').height()
+  const width= $('#resize_image1').width()
+  $('#row_1_cake').height(height)
+  $('#row_1_cake').width(width)
+  $('#row_1_keyboard').height(height)
+  $('#row_1_keyboard').width(width)
+}
+changeSize()
+ window.addEventListener('resize', function(event) {
+      changeSize()
+      if(height/width>1.5){
+        window.location.reload()
+      }
+}, false);
 
-
-// window.addEventListener('resize', function(event) {
-//   // ...
+// $(window).resize(function() {
+//   //resize just happened, pixels changed
 //   console.log("window resize")
-
-//   // location.reload();
-
-// }, true);
-
-$(window).resize(function() {
-  //resize just happened, pixels changed
-  console.log("window resize")
-  location.reload();
-});
+//   location.reload();
+// });
 
 
