@@ -194,10 +194,26 @@ changeSize()
       // }
 }, false);
 
-// $(window).resize(function() {
-//   //resize just happened, pixels changed
-//   console.log("window resize")
-//   location.reload();
-// });
+
+
+function set_jaxtapose_img_size(){
+  const height= $('#jaxtapose_img_1').height()
+  const width= $('#jaxtapose_img_1').width()
+  $('#row_1_cake').height(height)
+  $('#row_1_cake').width(width)
+  $('#row_1_keyboard').height(height)
+  $('#row_1_keyboard').width(width)
+}
+
+const size_timeout = setInterval(
+  function(){
+    // console.log("size timeout")
+    set_jaxtapose_img_size()
+  }, 100
+)
+
+
+
+
 
 
