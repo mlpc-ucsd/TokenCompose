@@ -34,7 +34,7 @@
   |
   <a href="https://arxiv.org/abs/2312.03626"><strong>arXiv</strong></a>
   |
-  <a href="https://mlpc-ucsd.github.io/TokenCompose/"><strong>Twitter</strong></a>
+  <a href="https://x.com/zwcolin/status/1732578746949837205?s=46&t=_jLYQtkGRBhT0cOPjbEiiQ"><strong>X (Twitter)</strong></a>
 </h3>
 
 https://github.com/mlpc-ucsd/TokenCompose/assets/59942464/93feea16-4eac-49c3-b286-ee390a325b17
