@@ -32,7 +32,7 @@
 <h3 align="center">
   <a href="https://mlpc-ucsd.github.io/TokenCompose/"><strong>Project Page</strong></a>
   |
-  <a href="https://mlpc-ucsd.github.io/TokenCompose/"><strong>arXiv</strong></a>
+  <a href="https://arxiv.org/abs/2312.03626"><strong>arXiv</strong></a>
   |
   <a href="https://mlpc-ucsd.github.io/TokenCompose/"><strong>Twitter</strong></a>
 </h3>
