@@ -421,6 +421,13 @@ Our code is built upon [diffusers](https://github.com/huggingface/diffusers), [p
 ## 📝 Citation
 
 If you find our work useful, please consider citing:
-```
-Release soon!
+```bibtex
+@misc{wang2023tokencompose,
+      title={TokenCompose: Grounding Diffusion with Token-level Supervision}, 
+      author={Zirui Wang and Zhizhou Sha and Zheng Ding and Yilin Wang and Zhuowen Tu},
+      year={2023},
+      eprint={2312.03626},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 ```
