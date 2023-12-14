@@ -190,7 +190,7 @@ code {
 /* fancy text color start */
 .fancy_text_color {
   color: #015E97;
-  font-weight: bolder;
+  /* font-weight: bolder; */
 }
 /* fancy text color end */
 
