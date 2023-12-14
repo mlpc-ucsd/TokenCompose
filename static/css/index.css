@@ -291,9 +291,9 @@ code {
 }
 
 
-
-/* .no_max_width{
-  max-width: none;
-} */
+.no_pad_section {
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
 
 
