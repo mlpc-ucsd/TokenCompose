@@ -4,7 +4,7 @@
 **/wandb
 
 # train folder
-train/data/coco_gsam_img
+train/data/coco_gsam_img/train/*.jpg
 train/data/coco_gsam_seg
 train/results
 
