@@ -227,17 +227,19 @@
   </div>
 </section>
 
-<hr>
+<!-- <hr> -->
 
 <!-- Abstract -->
 <section class="section">
   <div class="container is-max-desktop">
+    <!-- abstract -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">
           <span class="fancy_text_color">Abstract</span>
         </h2>
-        <div class="content">
+        <!-- <div class="content"> -->
+          <div style="margin-bottom: 1em;">
           <p>
             We present <span class="fancy_text_color">TokenCompose</span>, a Latent Diffusion Model for text-to-image generation that achieves enhanced consistency between user-specified text prompts and model-generated images. Despite its tremendous success, the standard denoising process in the Latent Diffusion Model takes text prompts as conditions only, absent explicit constraint for the consistency between the text prompts and the image contents, leading to unsatisfactory results for composing multiple object categories. Our proposed <span class="fancy_text_color">TokenCompose</span> aims to improve multi-category instance composition by introducing the token-wise consistency terms between the image content and object segmentation maps in the finetuning stage. <span class="fancy_text_color">TokenCompose</span> can be applied directly to the existing training pipeline of text-conditioned diffusion models without extra human labeling information. By finetuning Stable Diffusion with our approach, the model exhibits significant improvements in multi-category instance composition and enhanced photorealism for its generated images.
           </p>
@@ -258,13 +260,64 @@
         </h2>
       </div>
     </div>
+
+    <br>
+
+    <!-- main table -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color">
+            <b>Performance of our model in comparison to baselines</b>
+          </span>
+        </h2>
+
+        <div class="has-text-centered" style="margin-bottom: 1em;">
+          <p>
+            We evaluate the performance based on multi-category instance composition (<i>i.e.,</i> Object Accuracy (OA) from VISOR Benchmark and MG2-5 from our <span class="dnerf">MultiGen</span> Benchmark), photorealism (<i>i.e.,</i> FID from <b>C</b>OCO and <b>F</b>lickr30K Entities validation splits), and inference efficiency. All comparisons are based on Stable Diffusion 1.4.
+          </p>
+        </div>
+
+        <!-- </br></br> -->
+
+        <div class="has-text-centered">
+          <img src="static/images/table1.jpg">
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- trianing pipeline -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color">
+            <b>An overview of the training pipeline</b>
+          </span>
+        </h2>
+
+        <div class="has-text-centered">
+          <p>
+            Given a training prompt that faithfully describes an image, we adopt a POS tagger and Grounded SAM to extract all binary segmentation maps of the image corresponding to noun tokens from the prompt. Then, we jointly optimize the denoising U-Net of the diffusion model with both its original denoising and our grounding objective.
+          </p>
+        </div>
+
+        </br></br>
+
+        <div class="has-text-centered">
+          <img src="static/images/pipeline.jpg">
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<hr>
+<!-- <hr> -->
 
 <!-- main table -->
-<section class="section">
+<!-- <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -288,13 +341,13 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 
-<hr>
+<!-- <hr> -->
 
 <!-- training pipeline -->
-<section class="section">
+<!-- <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -318,9 +371,9 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<hr>
+<!-- <hr> -->
 
 <!-- loss illustration video -->
 <section class="section">
