@@ -41,6 +41,13 @@
   <a href="https://x.com/zwcolin/status/1732578746949837205?s=46&t=_jLYQtkGRBhT0cOPjbEiiQ"><strong>X (Twitter)</strong></a>
 </h3>
 
+### Updates
+*If you use our method and/or model for your research project, we are happy to provide cross-reference here in the updates.* :)
+
+[04/04/2024] 🔥 Our training methodology is incorporated into [CoMat](https://arxiv.org/abs/2404.03653) which shows enhanced text-to-image attribute assignments.  
+[02/26/2024] 🔥 TokenCompose is accepted to CVPR 2024!  
+[02/20/2024] 🔥 TokenCompose is used as a base model from the [RealCompo](https://arxiv.org/abs/2402.12908) paper for enhanced compositionality.  
+
 https://github.com/mlpc-ucsd/TokenCompose/assets/59942464/93feea16-4eac-49c3-b286-ee390a325b17
 
 <p align="center">
