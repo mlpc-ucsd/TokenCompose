@@ -4,7 +4,7 @@
   <p align="center">
     <a href="https://zwcolin.github.io/"><strong>Zirui Wang</strong></a><sup>1, 3</sup>
     ·
-    <a href="https://github.com/JamesSand"><strong>Zhizhou Sha</strong></a><sup>2, 3</sup>
+    <a href="https://jamessand.github.io/"><strong>Zhizhou Sha</strong></a><sup>2, 3</sup>
     ·
     <a href="https://github.com/zh-ding"><strong>Zheng Ding</strong></a><sup>3</sup>
     ·
