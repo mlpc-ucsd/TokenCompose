@@ -1,6 +1,6 @@
 <p align="center">
 
-  <h1 align="center"><a href="https://mlpc-ucsd.github.io/TokenCompose/">🧩 TokenCompose</a>: Grounding Diffusion with Token-level Supervision</h1>
+  <h1 align="center"><a href="https://mlpc-ucsd.github.io/TokenCompose/">🧩 TokenCompose</a>: Text-to-Image Diffusion with Token-level Supervision</h1>
   <p align="center">
     <a href="https://zwcolin.github.io/"><strong>Zirui Wang</strong></a><sup>1, 3</sup>
     ·
@@ -51,7 +51,7 @@
 https://github.com/mlpc-ucsd/TokenCompose/assets/59942464/93feea16-4eac-49c3-b286-ee390a325b17
 
 <p align="center">
-  A <span style="color: lightblue">Stable Diffusion</span> model finetuned with <strong>token-level grounding objectives</strong> for enhanced <strong>multi-category instance composition</strong> and <strong>photorealism</strong>.
+  A <span style="color: lightblue">Stable Diffusion</span> model finetuned with <strong>token-level consistency terms</strong> for enhanced <strong>multi-category instance composition</strong> and <strong>photorealism</strong>.
 </p>
 
 <br>
@@ -322,7 +322,7 @@ See [MultiGen](multigen/readme.md) for details.
 
 ## 💻 Environment Setup
 
-For those who want to use our codebase to **train your own diffusion models with grounding objectives**, follow the below instructions:
+For those who want to use our codebase to **train your own diffusion models with token-level objectives**, follow the below instructions:
 
 ```bash
 conda create -n TokenCompose python=3.8.5
@@ -433,12 +433,12 @@ Our code is built upon [diffusers](https://github.com/huggingface/diffusers), [p
 
 If you find our work useful, please consider citing:
 ```bibtex
-@misc{wang2023tokencompose,
-      title={TokenCompose: Grounding Diffusion with Token-level Supervision}, 
-      author={Zirui Wang and Zhizhou Sha and Zheng Ding and Yilin Wang and Zhuowen Tu},
-      year={2023},
-      eprint={2312.03626},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@InProceedings{Wang2024TokenCompose,
+    author    = {Wang, Zirui and Sha, Zhizhou and Ding, Zheng and Wang, Yilin and Tu, Zhuowen},
+    title     = {TokenCompose: Text-to-Image Diffusion with Token-level Supervision},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {8553-8564}
 }
 ```
