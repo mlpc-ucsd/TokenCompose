@@ -6,7 +6,7 @@
         content="We introduce token-wise consistency terms between the image content and object segmentation maps in training text-to-image models for enhanced multi-category instance composition and photorealism.">
   <meta name="keywords" content="TokenCompose, Diffusion, Stable Diffusion, finetuning">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TokenCompose: Grounding Diffusion with Token-level Supervision</title>
+  <title>TokenCompose: Text-to-Image Diffusion with Token-level Supervision</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
@@ -64,8 +64,7 @@
         <div class="column has-text-centered is-four-fifths">
           <h1 class="title is-1 publication-title">
             <img src="./static/images/puzzle.png" width="35"/>
-            <span class="rainbow_text_animated">TokenCompose</span>
-            : Grounding Diffusion with Token-level Supervision
+            <span class="rainbow_text_animated">TokenCompose</span>: Text-to-Image Diffusion with Token-level Supervision
           </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
@@ -178,7 +177,7 @@
             A <span class="fancy_text_color">
               <!-- <b>Stable Diffusion</b> -->
               Stable Diffusion
-            </span> model finetuned with token-wise grounding objectives for enhanced multi-category instance composition and photorealism.
+            </span> model finetuned with token-wise consistency terms for enhanced multi-category instance composition and photorealism.
           </h2>
         </div>
       </div>
@@ -303,7 +302,7 @@
 
         <div class="has-text-centered">
           <p>
-            Given a training prompt that faithfully describes an image, we adopt a POS tagger and Grounded SAM to extract all binary segmentation maps of the image corresponding to noun tokens from the prompt. Then, we jointly optimize the denoising U-Net of the diffusion model with both its original denoising and our grounding objective.
+            Given a training prompt that faithfully describes an image, we adopt a POS tagger and Grounded SAM to extract all binary segmentation maps of the image corresponding to noun tokens from the prompt. Then, we jointly optimize the denoising U-Net of the diffusion model with both its original denoising and our token-wise objective.
           </p>
         </div>
 
@@ -1128,13 +1127,13 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <pre style="border-radius: 25px;">
-          <code>@misc{wang2023tokencompose,
-            title={TokenCompose: Grounding Diffusion with Token-level Supervision}, 
-            author={Zirui Wang and Zhizhou Sha and Zheng Ding and Yilin Wang and Zhuowen Tu},
-            year={2023},
-            eprint={2312.03626},
-            archivePrefix={arXiv},
-            primaryClass={cs.CV}
+          <code>@InProceedings{Wang2024TokenCompose,
+            author    = {Wang, Zirui and Sha, Zhizhou and Ding, Zheng and Wang, Yilin and Tu, Zhuowen},
+            title     = {TokenCompose: Text-to-Image Diffusion with Token-level Supervision},
+            booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+            month     = {June},
+            year      = {2024},
+            pages     = {8553-8564}
         }</code>
         </pre>
       </div>
