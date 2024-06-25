@@ -423,7 +423,7 @@ The results will be saved under `train/results` directory.
 
 ## 🏷️ License
 
-This repository is released under the [Apache 2.0](LICENSE). 
+This repository is released under the [Apache 2.0](LICENSE) license. 
 
 ## 🙏 Acknowledgement
 
