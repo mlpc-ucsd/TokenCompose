@@ -1,5 +1,5 @@
 '''
-Folloing code partly adapted from
+The folloing code is partly adapted from
 https://github.com/huggingface/diffusers/blob/main/examples/text_to_image/train_text_to_image.py
 '''
 from PIL import Image
