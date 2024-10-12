@@ -1,5 +1,5 @@
 '''
-Following code is adapted from 
+The following code is adapted from 
 https://github.com/huggingface/diffusers/blob/main/examples/text_to_image/train_text_to_image.py
 '''
 
