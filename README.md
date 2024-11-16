@@ -57,7 +57,7 @@ https://github.com/mlpc-ucsd/TokenCompose/assets/59942464/93feea16-4eac-49c3-b28
 <br>
 
 <div align="center">
-  <img src="asset/teaser.jpg" alt="Logo" width="100%">
+  <img src="teaser.jpg" alt="Logo" width="100%">
 </div>
 
 
