@@ -413,7 +413,7 @@ Then, to run TokenCompose, use the following command:
 
 ```bash
 cd train
-bash scripts/train.sh
+bash train.sh
 ```
 
 The results will be saved under `train/results` directory.
