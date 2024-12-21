@@ -1,8 +1,6 @@
 .DS_store
 .idea
 
-**/*.pptx
-
 **/*.pdf
 
 **/pdfs
